@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>WebSocket Chat</h2>
+  <input id="msg" type="text">
+  <button onclick="send()">Enviar</button>
+  <pre id="log"></pre>
+
+  <script>
+    const ws = new WebSocket("ws://localhost:8765");
+    ws.onmessage = e => {
+      document.getElementById("log").textContent += e.data + "\n";
+    };
+    function send() {
+      const m = document.getElementById("msg").value;
+      ws.send(m);
+    }
+  </script>
+</body>
+</html>
