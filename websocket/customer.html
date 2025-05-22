@@ -2,18 +2,28 @@
 <html>
 <body>
   <h2>WebSocket Chat</h2>
+
+  <!-- Campo de entrada de texto para el mensaje -->
   <input id="msg" type="text">
+  <!-- Botón para enviar el mensaje -->
   <button onclick="send()">Enviar</button>
+
+  <!-- Área para mostrar los mensajes recibidos -->
   <pre id="log"></pre>
 
   <script>
+    // Crear una conexión WebSocket al servidor
     const ws = new WebSocket("ws://localhost:8765");
+
+    // Cuando se recibe un mensaje, agregarlo al área de log
     ws.onmessage = e => {
       document.getElementById("log").textContent += e.data + "\n";
     };
+
+    // Función para enviar un mensaje al servidor WebSocket
     function send() {
       const m = document.getElementById("msg").value;
-      ws.send(m);
+      ws.send(m); // Enviar mensaje
     }
   </script>
 </body>
